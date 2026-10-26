@@ -5,7 +5,7 @@ evidencia: "E1"
 dia: 1
 responsable_registro: "equipo"
 estado: "PENDIENTE"
-fecha: "AAAA-MM-DD"
+fecha: "2026-10-26"
 revision_docente: "PENDIENTE"
 ---
 
@@ -17,20 +17,20 @@ revision_docente: "PENDIENTE"
 
 | Campo obligatorio | Dato |
 |---|---|
-| Fecha y horario de esta sesión | [AAAA-MM-DD; HH:MM–HH:MM, 180 min] |
-| Nombre / alias del equipo | [kd26-mXX-equipoYY] |
-| Misión / plataforma | [M01 mini-sumo autónomo / M03 seguidor / M04 Tello Python / M05 AMR ROS 2] |
-| Objetivo verificable del robot (una frase) | [Acción + condiciones + éxito] |
-| **Dōjō asignado — campus, edificio y sala/taller exactos** | **[Campus ___ / Edificio ___ / Sala o taller ___ / Nº de laboratorio ___]** |
-| Puesto o zona dentro del dōjō | [Mesa, banco, espacio de vuelo, pista, dohyō o estación] |
-| Horario / reserva confirmada | [Fechas y bloque horario; quien la autorizó] |
-| Responsable del espacio y contacto institucional | [Nombre/cargo y canal institucional, sin publicar teléfonos privados] |
-| Acceso, aforo y ajustes de accesibilidad | [Restricciones de ingreso, capacidad, adecuaciones necesarias] |
-| Salidas, botiquín, extintor y punto de reunión | [Ubicación real validada al llegar] |
-| Zonas segregadas por riesgo | [Vuelo / herramientas / tránsito AMR / ensayo de pista] |
-| Ubicación de materiales y resguardo nocturno | [Gabinete/estante/inventario; responsable] |
-| Plan de sustitución si falla el espacio | [Dōjō alternativo con autorización; no improvisar espacio de vuelo] |
-| Instructor o supervisor presente en la sesión | [@alias / nombre institucional] |
+| Fecha y horario de esta sesión | [2026-10-26; 9:00–12:00, 180 min] |
+| Nombre / alias del equipo | [Apolitos] |
+| Misión / plataforma | [M05 AMR ROS 2] |
+| Objetivo verificable del robot (una frase) | [El robot se debe mover de manera controlada, utilizando sus sensores haciendo una ruta predefinifa e identificando marcadores con la cámara] |
+| **Dōjō asignado — campus, edificio y sala/taller exactos** | **[Campus _León__ / Edificio _Choza__ / Sala o taller __Choza_ / Nº de laboratorio _Choza__]** |
+| Puesto o zona dentro del dōjō | [Pista] |
+| Horario / reserva confirmada | [9:00-12:00] |
+| Responsable del espacio y contacto institucional | [Camilo Duque Becerra Camilo.duque@tec.mx] |
+| Acceso, aforo y ajustes de accesibilidad | Revisar llaves del lugar para poder acceder |
+| Salidas, botiquín, extintor y punto de reunión | [CTA] |
+| Zonas segregadas por riesgo | [Tránsito AMR / ensayo de pista] |
+| Ubicación de materiales y resguardo nocturno | [LNA] |
+| Plan de sustitución si falla el espacio | [Pista Alternativa] |
+| Instructor o supervisor presente en la sesión | [Camilo Duque Becerra Camilo.duque@tec.mx] |
 
 > ⛔ **No se permite avanzar a pruebas físicas sin dōjō concreto y autorización del responsable.** No inventar salón, número de laboratorio ni recursos que no hayan sido confirmados.
 
@@ -38,20 +38,23 @@ revision_docente: "PENDIENTE"
 
 | Alias GitHub | Rol inicial | Carta y frontera (D/S/E; F1–F4) | Alcances ID (1–3) | Kit personal (archivo) | Necesidad de apoyo o accesibilidad acordada |
 |---|---|---|---|---|---|
-| [@alias-1] | [Integración / documentación / seguridad / pruebas ...] | [D · F1 · D1] | [MS01, MS02] | [`../../participantes/alias/compromiso.md`](../../participantes/_plantilla/compromiso.md) | [Acordar con la persona sin registrar datos sensibles] |
-| [@alias-2] | [...] | [...] | [...] | [enlace] | [...] |
+| [@Ivanna0407] | [Pruebas] | [D · F1 · D1] | [NA] | [`../../participantes/alias/compromiso.md`](https://github.com/Alxsoool/apolitos_AMR-/blob/main/participantes/_plantilla/Compromiso_Ivanna_Mart%C3%ADnez_de_Alba.md) |
+| [@a00575141-hash] | [seguridad] | [NA] | [participantes/compromiso-kaizen-miranda-garcia-marquez (1).md] 
+| [@a00574597] | [Integración] | [NA] | [AR01 AR10] | 
+[participantes/_plantilla/compromiso-kaizen-massimo-orozco-ocampo.md]
+| [@a00574830] | [Pruebas] | [D · F1 · D1] | [NA] | [https://github.com/Alxsoool/apolitos_AMR-/blob/eda5562445bbc56c55a8c4221a3195d3783b9335/participantes/_plantilla/compromiso-kaizen-alexa-marisol-rodriguez-barajas.md] 
 
-**Acuerdo de colaboración:** [Cómo se toman decisiones, cómo se resuelven conflictos, apoyos senpai–kōhai, pausas y distribución equitativa de participación.]
+**Acuerdo de colaboración:** [Siempre nos comunicamos entre nosotros de que es lo que estamos haciendo y lo que necesitamos, nos apoyamos como compañeros en caso de tener dudas o no estar seguros de algo. Si hay algun conflicto se habla de manera calmada ente los miembros y en caso de ser necesario se puede pedir apoyo al profesor, todos colaboramos en las actividades que hacemos, sin dejar a nadie atrás o solo]]
 
 ## 2 · Demostración de la plataforma y seguridad (15–35 min)
 
 | Elemento | Observación directa | Evidencia / vínculo |
 |---|---|---|
-| Plataforma base inspeccionada (estado, modelo, ID inventario) | [ ] | [enlace / foto no sensible] |
-| Funciones existentes y límites comprobados | [ ] | [enlace] |
-| Paro de emergencia / desconexión segura ensayados | [ ] | [enlace / tutor responsable] |
-| Restricciones de competición o exhibición verificadas | [ ] | [fuente / por verificar] |
-| Riesgos vistos y medidas activas | [ ] | [docs/seguridad.md] |
+| Plataforma base inspeccionada (estado, modelo, ID inventario) | [AGV 2023 PI Elephant Robotics ] | [https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwjgpcDlm9iXAxXvEkQIHRT-HpIQFnoECBIQAQ&url=https%3A%2F%2Fwww.3dmarket.mx%2Fp%2Fmyagv-2023-pi-elephant-robotics%2F%3Fsrsltid%3DAYCX9vK4FhiuGFzijKWIhrng3SFxqYSygYlzRH496652_yk4boD6jYFO&usg=AOvVaw0lSb-53SOPrEij7BO0_YVS&opi=89978449] |
+| Funciones existentes y límites comprobados | [Autónomo, RC, LiDAR ] | [NA] |
+| Paro de emergencia / desconexión segura ensayados | [ SHUT DOWN] | [enlace / tutor responsable] |
+| Restricciones de competición o exhibición verificadas | [ Mantenerse dentro del área de mapeo , no uso del brazo robótico] | [fuente / por verificar] |
+| Riesgos vistos y medidas activas | [Se puede quemar y desconfigurar ] | [NA] |
 
 **Normas específicas según misión:**
 - **M01:** protecciones de alimentación; desarmar motores antes de tocar ruedas; dohyō delimitado, rival de referencia y bordes seguros.
@@ -61,13 +64,13 @@ revision_docente: "PENDIENTE"
 
 ## 3 · Diagnóstico práctico colectivo (35–65 min)
 
-**Condición inicial V0 de la plataforma:** [Robot completo / kit / subensambles / simulador; qué funciona y qué falta]
+**Condición inicial V0 de la plataforma:** [Robot completo]
 
 | Prueba diagnóstica | Condición y procedimiento | Resultado observado / unidad | Problema / causa probable | Evidencia |
 |---|---|---|---|---|
-| [1: movimiento o comunicación] | [...] | [...] | [...] | [enlace] |
-| [2: lectura de sensor] | [...] | [...] | [...] | [enlace] |
-| [3: comportamiento de la misión] | [...] | [...] | [...] | [enlace] |
+| [1: movimiento o comunicación] | [Batería] | [Movimiento] | [Mapeo incorrecto] | [enlace] |
+| [2: lectura de sensor] | [Cámara] | [Transmisión] | [Mala calibración] | [enlace] |
+
 
 **Capacidades ya disponibles y dependencias:** [qué módulos se pueden reutilizar, y qué necesita cada alcance de otro integrante.]
 
@@ -84,6 +87,9 @@ Se conserva íntegro (incluido el frontmatter y la lista de katas). Los nuevos a
 | Alias | Kit enlazado | Alcance principal | Complementos | Katas elegidos o nuevos | Horas mín.–máx. | Evidencia final esperada | Negociación aprobada |
 |---|---|---|---|---|---|---|---|
 | [@alias] | [compromiso.md] | [MS01] | [MS02 / ninguno] | [K1, K3 / propio] | [6–8 h] | [CAD ensamblado + prueba] | [Sí / Pendiente; revisor] |
+| [A00575141-Bash] | [participantes/compromiso-kaizen-miranda-garcia-marquez (1).md]  | [MS02,MS011] | [MS02 / los tres] | [K1, K3 / propio] | [6–8 h] | [Mapeo-prueba] | [Sí / Pendiente; revisor] |
+| [@a00574597] | [compromiso-kaizen-massimo-orozco-ocampo.md] | [MS01] | [MS02 / ninguno] | [K1, K3] | [6–8 h] | [Prueba] | [Sí] |
+| [@a00574830] | [compromiso-kaizen-alexa-marisol-rodriguez-barajas.md] | [AR01, AR10] | [MS02 / MS10] | [K1, K2, K3 ] | [6–8 h] | [prueba] | [Sí; revisor] |
 
 **Resultado de negociación grupal:** [Puntos de integración; interfaces entre códigos/firmware/sensores/estructura; prioridad si no hay tiempo.]
 
@@ -95,11 +101,8 @@ Completar **cada recurso requerido**: estructura, electrónica, actuadores, sens
 
 | ID | Categoría | Material o recurso (especificación exacta: modelo, medida, versión o característica) | Cantidad requerida + unidad | Cantidad confirmada | Fuente/proveedor o dueño | Ubicación física o ruta digital | Responsable | Estado (disponible/reservado/falta) | Alternativa compatible | Día requerido |
 |---|---|---|---|---|---|---|---|---|---|---|
-| MAT-001 | [Robot/plataforma] | [Modelo preciso y compatibilidad] | [1 ud.] | [?] | [laboratorio/equipo] | [armario] | [@alias] | [por confirmar] | [alternativa] | [D1] |
-| MAT-002 | [Mecánica/electrónica/sensor] | [...] | [...] | [...] | [...] | [...] | [...] | [...] | [...] | [...] |
-| MAT-003 | [Herramienta/seguridad/medición] | [...] | [...] | [...] | [...] | [...] | [...] | [...] | [...] | [...] |
-| MAT-004 | [Software/datos/conectividad] | [SO + versión, ROS/Python/OpenCV o controlador, puerto/red] | [...] | [...] | [...] | [...] | [...] | [...] | [...] | [...] |
-| MAT-005 | [Zona de pruebas] | [Pista/dohyō/marcadores/mapa; dimensiones y configuración] | [...] | [...] | [...] | [...] | [...] | [...] | [...] | [...] |
+| MAT-001 | [AMR] | [myAGV2023, accesorios] | [1ud.] | [1] | [LNA] | [EIC] | [@CamiloDuque] | [DIsponible] | [Arismendi] | [D2] |
+| MAT-002 | [Zona de pruebas] | [Pista; dimensiones y configuración] | [1ud.] | [1] | [LNA] | [EIC] | [Camilo René Duque Becerra] | [Disponible] | [Arismendi] | [D2] |
 
 También disponible el archivo [`datos/inventario_materiales.csv`](../../datos/inventario_materiales.csv) para registrar muchos materiales sin agrandar esta tabla.
 
@@ -107,10 +110,7 @@ También disponible el archivo [`datos/inventario_materiales.csv`](../../datos/i
 
 | Misión | Revisar y especificar (marca/modelo/cantidad reales) |
 |---|---|
-| M01 · Mini-sumo autónomo | Chasis y material para cuñas, ruedas/motores/soportes, driver, controlador y firmware, batería/cargador/fusible, sensores de borde y rival, cableado/conectores, dohyō/rival de referencia, CAD/impresora 3D/herramientas, instrumentos de medición y protocolo de paro. |
-| M03 · Seguidor de línea | Chasis/ruedas/motores, driver, controlador, barra de sensores reflectivos/soportes, batería/cargador, placa y cableado, pista con curvas y superficie definida, software de programación, cinta/regla/cronómetro/instrumentos y paro seguro. |
-| M04 · Tello Python | **Modelo Tello verificado** y baterías suficientes, cargador, computadora y adaptador Wi-Fi, versión Python y SDK compatible, OpenCV si aplica, marcadores visuales impresos, área interior de vuelo demarcada, supervisor/observador, barreras y protocolo de aterrizaje/abortos. |
-| M05 · AMR ROS 2 | Base AMR y baterías/cargador, computador y distribución ROS 2/paquetes, workspace y repositorio base, sensores (p. ej. lidar/odometría), mapa y TF/localización, RViz/Nav2 si aplica, red de comunicación, estaciones/marcadores, área de navegación acordonada, instrumento de medida y paro seguro. |
+| M01 · AMR ROS 2 | Base AMR y baterías/cargador, computador y distribución ROS 2/paquetes, workspace y repositorio base, sensores (p. ej. lidar/odometría), mapa y TF/localización, RViz/Nav2 si aplica, red de comunicación, estaciones/marcadores, área de navegación acordonada, instrumento de medida y paro seguro. |
 
 **Enlaces a fichas técnicas / instrucciones de conexión, fabricación y seguridad:** [URLs o rutas dentro del repositorio.]
 
@@ -118,7 +118,7 @@ También disponible el archivo [`datos/inventario_materiales.csv`](../../datos/i
 
 | Bloqueante | A qué alcance afecta | Solución prevista / fecha y responsable | Impacto si no se resuelve |
 |---|---|---|---|
-| [material o software aún no validado] | [...] | [...] | [reducir alcance / simulación / replanificar] |
+| [Teclado] | [Simulación y programación] | [Obtener un repuesto - Miranda - 27/10/2026] | [Simulación y compilación fallida] |
 
 **Materiales completos para ejecutar el Día 2:** [Sí / Parcial / No]. **Confirmado por:** [docente y responsable equipo] a [fecha/hora].
 
@@ -127,24 +127,29 @@ También disponible el archivo [`datos/inventario_materiales.csv`](../../datos/i
 | Integrante/alcance | Pregunta técnica | Mini-prueba o prototipo de exploración | Resultado o error observado | Evidencia enlazada | Acción necesaria antes de D2 |
 |---|---|---|---|---|---|
 | [@alias / ID] | [qué quiero verificar] | [qué hice] | [qué ocurrió] | [commit/foto/log] | [acción] |
+| [@a00575141-bash] | [Por qué la cámara no detecta los arucos] | [Calibrar cámara] | [Detecta algunos] |
+| [@A00574830] | [Conexión al AMR] | [Investigación técnica] | [Documentación] | [Descargar software] |
+| [@A00574597] | [Conexión al AMR] | [Investigación técnica] | [Documentación] | [NA]| [Descargar software] |
 
 **Integración entre subequipos:** [Qué interfaz se dejó validada: alimentación, dimensiones, tópicos, salida sensorial, etc.]
 
 ## 7 · Cierre: contrato técnico y puerta de salida E1 (160–180 min)
 
-- [ ] El objetivo colectivo tiene condición de éxito verificable.
-- [ ] Cada estudiante depositó **su kit Markdown original** en `participantes/<alias>/compromiso.md`.
-- [ ] Cada estudiante completó [E1 personal](../../participantes/_plantilla/dias/E1.md) y definió frontera, evidencia y alcance negociado.
-- [ ] El inventario está **completo** y cada recurso indica cantidad, especificación, disponibilidad y responsable.
-- [ ] Se asignó **dōjō específico** con edificio, salón/taller, horarios, supervisión y autorización.
-- [ ] Se inspeccionaron riesgos, paro y condiciones de seguridad de la plataforma.
-- [ ] Se identificaron dependencias y bloqueos del Día 2; están bajo control o se ajustó la misión.
-- [ ] El profesor aprobó el alcance y la seguridad, o registró observaciones y una alternativa viable.
+- [si] El objetivo colectivo tiene condición de éxito verificable.
+- [si] Cada estudiante depositó **su kit Markdown original** en `participantes/<alias>/compromiso.md`.
+- [si] Cada estudiante completó [E1 personal](../../participantes/_plantilla/dias/E1.md) y definió frontera, evidencia y alcance negociado.
+- [si] El inventario está **completo** y cada recurso indica cantidad, especificación, disponibilidad y responsable.
+- [si] Se asignó **dōjō específico** con edificio, salón/taller, horarios, supervisión y autorización.
+- [si] Se inspeccionaron riesgos, paro y condiciones de seguridad de la plataforma.
+- [si] Se identificaron dependencias y bloqueos del Día 2; están bajo control o se ajustó la misión.
+- [si] El profesor aprobó el alcance y la seguridad, o registró observaciones y una alternativa viable.
 
-**Estado del gate:** [APROBADO / APROBADO CON CONDICIONES / REPLANIFICAR].
+**Estado del gate:** [APROBADO].
 
-**Condiciones, responsables, fecha y próxima decisión:** [ ... ]
+**Condiciones, responsables, fecha y próxima decisión:** [ 27/10/2026]
 
 **Revisor docente:** [ ... ] · **Enlace a commit/PR:** [ ... ]
 
 **Criterio mínimo E1:** existe un contrato de misión y frontera individual, hay evidencia del punto de partida, un inventario verificable y un espacio de trabajo autorizado. La ausencia de algún material crítico NO debe esconderse.
+
+
