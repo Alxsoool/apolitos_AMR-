@@ -86,7 +86,7 @@ Se conserva íntegro (incluido el frontmatter y la lista de katas). Los nuevos a
 
 | Alias | Kit enlazado | Alcance principal | Complementos | Katas elegidos o nuevos | Horas mín.–máx. | Evidencia final esperada | Negociación aprobada |
 |---|---|---|---|---|---|---|---|
-| [@alias] | [compromiso.md] | [MS01] | [MS02 / ninguno] | [K1, K3 / propio] | [6–8 h] | [CAD ensamblado + prueba] | [Sí / Pendiente; revisor] |
+| ivanna0407 | [https://github.com/Alxsoool/apolitos_AMR-/blob/main/participantes/_plantilla/Compromiso_Ivanna_Mart%C3%ADnez_de_Alba.md] | [AR10] | [MS05] | [K1 Y propio] | [6–8 h] | Prueba del robot | [Sí / Pendiente; revisor] |
 | [A00575141-Bash] | [participantes/compromiso-kaizen-miranda-garcia-marquez (1).md]  | [MS02,MS011] | [MS02 / los tres] | [K1, K3 / propio] | [6–8 h] | [Mapeo-prueba] | [Sí / Pendiente; revisor] |
 | [@a00574597] | [compromiso-kaizen-massimo-orozco-ocampo.md] | [MS01] | [MS02 / ninguno] | [K1, K3] | [6–8 h] | [Prueba] | [Sí] |
 | [@a00574830] | [compromiso-kaizen-alexa-marisol-rodriguez-barajas.md] | [AR01, AR10] | [MS02 / MS10] | [K1, K2, K3 ] | [6–8 h] | [prueba] | [Sí; revisor] |
@@ -112,7 +112,7 @@ También disponible el archivo [`datos/inventario_materiales.csv`](../../datos/i
 |---|---|
 | M01 · AMR ROS 2 | Base AMR y baterías/cargador, computador y distribución ROS 2/paquetes, workspace y repositorio base, sensores (p. ej. lidar/odometría), mapa y TF/localización, RViz/Nav2 si aplica, red de comunicación, estaciones/marcadores, área de navegación acordonada, instrumento de medida y paro seguro. |
 
-**Enlaces a fichas técnicas / instrucciones de conexión, fabricación y seguridad:** [URLs o rutas dentro del repositorio.]
+**Enlaces a fichas técnicas / instrucciones de conexión, fabricación y seguridad:** https://docs.elephantrobotics.com/docs/myagv_jn23_en/1-ProductIntroduction/
 
 ### 5.3 Riesgos de recursos y abastecimiento
 
@@ -120,13 +120,13 @@ También disponible el archivo [`datos/inventario_materiales.csv`](../../datos/i
 |---|---|---|---|
 | [Teclado] | [Simulación y programación] | [Obtener un repuesto - Miranda - 27/10/2026] | [Simulación y compilación fallida] |
 
-**Materiales completos para ejecutar el Día 2:** [Sí / Parcial / No]. **Confirmado por:** [docente y responsable equipo] a [fecha/hora].
+**Materiales completos para ejecutar el Día 2:**   Parcial  **Confirmado por:** [docente y responsable equipo] a [fecha/hora].
 
 ## 6 · Kata 0 — exploración técnica de arranque (100–160 min)
 
 | Integrante/alcance | Pregunta técnica | Mini-prueba o prototipo de exploración | Resultado o error observado | Evidencia enlazada | Acción necesaria antes de D2 |
 |---|---|---|---|---|---|
-| [@alias / ID] | [qué quiero verificar] | [qué hice] | [qué ocurrió] | [commit/foto/log] | [acción] |
+| ivanna0407 | Que necesita el robot para alinearse a un punto | revisar que sensores tiene y como leerlos |Pude ver imagenes de la cámara y tomar distancias de los marcadores |  |
 | [@a00575141-bash] | [Por qué la cámara no detecta los arucos] | [Calibrar cámara] | [Detecta algunos] |
 | [@A00574830] | [Conexión al AMR] | [Investigación técnica] | [Documentación] | [Descargar software] |
 | [@A00574597] | [Conexión al AMR] | [Investigación técnica] | [Documentación] | [NA]| [Descargar software] |
