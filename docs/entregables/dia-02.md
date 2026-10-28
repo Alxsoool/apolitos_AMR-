@@ -5,7 +5,7 @@ evidencia: "E2"
 dia: 2
 responsable_registro: "equipo"
 estado: "PENDIENTE"
-fecha: "2026-10-28"
+fecha: "2026-10-27"
 revision_docente: "PENDIENTE"
 ---
 
@@ -17,9 +17,9 @@ revision_docente: "PENDIENTE"
 
 | Campo | Dato |
 |---|---|
-| Fecha, equipo, misión y plataforma | 2026-10-28 \| Apolitos \| M05 AMR ROS 2 \| myAGV 2023 Pi Elephant Robotics |
+| Fecha, equipo, misión y plataforma | 2026-10-27 \| Apolitos \| M05 AMR ROS 2 \| myAGV 2023 Pi Elephant Robotics |
 | Dōjō real y mesa/zona utilizada | Campus León, Edificio Choza, Taller Choza, Puesto: Pista |
-| Estado del gate E1 / cambios desde D1 | Aprobado (Obtención de repuesto de teclado pendiente desde el 27/10/2026 por @a00575141-bash) |
+| Estado del gate E1 / cambios desde D1 | Aprobado (Obtención de repuesto de teclado pendiente desde el 26/10/2026 por @a00575141-bash) |
 | Kit por integrante / compromisos modificados | Sin modificaciones de compromiso; se mantiene estructura de E1 |
 | Materiales recibidos y pendientes | MAT-001 (myAGV2023 base), MAT-002 (Pista); Pendiente/Bloqueado: Teclado USB de repuesto (Responsable: @a00575141-bash) |
 | Objetivo técnico del Día 2 | Primera integración V1 para teleoperación básica, lectura de LiDAR/cámara e inicio de mapeo del entorno |
