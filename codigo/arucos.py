@@ -1,102 +1,80 @@
-import rclpy
-from rclpy.node import Node
-from geometry_msgs.msg import Twist
-from ros2_aruco_interfaces.msg import ArucoMarkers  # Ajusta si usas otro paquete de ArUco
-import math
+import cv2
+import cv2.aruco as aruco
+import numpy as np
 
-class ArucoAligner(Node):
-    def __init__(self):
-        super().__init__('aruco_aligner')
-        
-        # Publicador de velocidad para mover el myAGV (cmd_vel)
-        self.cmd_vel_pub = self.create_publisher(Twist, 'cmd_vel', 10)
-        
-        # Suscripción al tópico de detección de ArUco
-        # (Cambia '/aruco_detections' si tu nodo publica en otro tópico)
-        self.subscription = self.create_subscription(
-            ArucoMarkers,
-            '/aruco_detections',
-            self.aruco_callback,
-            10
-        )
-        
-        self.get_logger().info('Buscando marcadores ArUco para alinear...')
-        
-        # ID del marcador ArUco al que te quieres alinear (cámbialo según tu ID)
-        self.target_aruco_id = 0 
-        
-        # Distancia frontal objetivo en metros (ej. detenerse a 35 cm del marcador)
-        self.target_distance = 0.35 
+# 1. Pipeline de GStreamer para la cámara CSI del myAGV (extraído de la guía)
+def gstreamer_pipeline(
+    sensor_id=0,
+    capture_width=3264,
+    capture_height=2464,
+    display_width=960,
+    display_height=540,
+    framerate=21,
+    flip_method=0
+):
+    return (
+        f"nvarguscamerasrc sensor-id={sensor_id} ! "
+        f"video/x-raw(memory: NVMM), width=(int){capture_width}, height=(int){capture_height}, framerate=(fraction){framerate}/1 ! "
+        f"nvvidconv flip-method={flip_method} ! "
+        f"video/x-raw, width=(int){display_width}, height=(int){display_height}, format=(string)BGR ! "
+        f"videoconvert ! video/x-raw, format=(string)BGR ! "
+        f"appsink drop=True max-buffers=1 emit-signals=True"
+    )
 
-    def aruco_callback(self, msg):
-        twist = Twist()
-        found_target = False
-        
-        # Buscar el ID específico en la lista de marcadores detectados
-        for i, marker_id in enumerate(msg.marker_ids):
-            if marker_id == self.target_aruco_id:
-                found_target = True
-                
-                # Obtener la pose del marcador respecto a la cámara
-                pose = msg.poses[i]
-                
-                # Coordenadas cartesianas relativas a la cámara
-                x = pose.position.x  # Izquierda (+) / Derecha (-)
-                z = pose.position.z  # Distancia frontal en metros
-                
-                # Orientación (para calcular el ángulo de alineación)
-                q = pose.orientation
-                siny_cosp = 2.0 * (q.w * q.z + q.x * q.y)
-                cosy_cosp = 1.0 - 2.0 * (q.y * q.y + q.z * q.z)
-                yaw = math.atan2(siny_cosp, cosy_cosp)
-                
-                # --- CONTROL PROPORCIONAL DE ALINEACIÓN ---
-                
-                # 1. Control de giro (Angular Z): Centrar el robot frente al ArUco (x deber ser 0)
-                angular_speed = -2.0 * x  
-                
-                # 2. Control de avance (Linear X): Acercarse o alejarse hasta la distancia objetivo
-                distance_error = z - self.target_distance
-                linear_speed = 0.8 * distance_error
-                
-                # Limitar velocidades máximas por seguridad del myAGV
-                linear_speed = max(min(linear_speed, 0.15), -0.15)
-                angular_speed = max(min(angular_speed, 0.5), -0.5)
-                
-                # Condición de parada (tolerancia muy baja)
-                if abs(x) < 0.02 and abs(distance_error) < 0.02 and abs(yaw) < 0.05:
-                    self.get_logger().info('¡Alineación completada con éxito!')
-                    twist.linear.x = 0.0
-                    twist.angular.z = 0.0
-                    self.cmd_vel_pub.publish(twist)
-                    return
+def main():
+    # Abrir la cámara correctamente con GStreamer
+    cam = cv2.VideoCapture(gstreamer_pipeline(flip_method=0), cv2.CAP_GSTREAMER)
+    assert cam.isOpened(), "Error: La cámara del myAGV falló al abrirse"
+    
+    # Matriz de calibración y coeficientes provistos en la guía para resolución 960x540[cite: 3]
+    camera_matrix = np.array([
+        [785.855437, 0.0, 451.670922],
+        [0.0, 584.820336, 259.056856],
+        [0.0, 0.0, 1.0]
+    ])
+    dist_coeffs = np.array([0.095135, -0.109279, -0.002513, -0.002418, 0.0])
+    
+    marker_length = 0.05  # Tamaño real del lado del marcador en metros (cámbialo al tamaño impreso)[cite: 3]
+    aruco_dict = aruco.getPredefinedDictionary(aruco.DICT_6X6_250)
+    parameters = aruco.DetectorParameters()
 
-                # Aplicar velocidades
-                twist.linear.x = linear_speed
-                twist.angular.z = angular_speed
-                self.cmd_vel_pub.publish(twist)
-                
-                self.get_logger().info(
-                    f'Alineándose -> Distancia (Z): {z:.2f}m | Desplazamiento (X): {x:.2f}m',
-                    throttle_duration_sec=0.5
-                )
-                break
-        
-        # Si la cámara deja de ver el marcador temporalmente, el robot se detiene por seguridad
-        if not found_target:
-            twist.linear.x = 0.0
-            twist.angular.z = 0.0
-            self.cmd_vel_pub.publish(twist)
+    print("Iniciando detección de ArUco. Presiona la tecla 'q' en la ventana de video para salir.")
 
-def main(args=None):
-    rclpy.init(args=args)
-    node = ArucoAligner()
-    try:
-        rclpy.spin(node)
-    except KeyboardInterrupt:
-        pass
-    node.destroy_node()
-    rclpy.shutdown()
+    while True:
+        ret, frame = cam.read()
+        if not ret:
+            print("No se pudo recibir fotograma de la cámara.")
+            break
+            
+        # Mejorar contraste en iluminación irregular (recomendado en la guía)[cite: 3]
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        gray = cv2.equalizeHist(gray)
+        
+        corners, ids, rejected = aruco.detectMarkers(gray, aruco_dict, parameters=parameters)
+        
+        if ids is not None:
+            # Dibujar los marcadores detectados sobre la imagen
+            aruco.drawDetectedMarkers(frame, corners, ids)
+            
+            # Estimar la pose 3D (distancia Z y desplazamiento X/Y)[cite: 3]
+            rvecs, tvecs, _ = aruco.estimatePoseSingleMarkers(corners, marker_length, camera_matrix, dist_coeffs)
+            
+            for i, mid in enumerate(ids.flatten()):
+                # tvec[i][0] nos da [X, Y, Z] en metros respecto a la cámara[cite: 3]
+                x_cm = tvecs[i][0][0] * 100
+                y_cm = tvecs[i][0][1] * 100
+                z_cm = tvecs[i][0][2] * 100
+                
+                # Imprimir en consola los datos métricos exactos
+                print(f"ID ArUco: {mid} | Distancia frontal (Z): {z_cm:.1f} cm | Offset horizontal (X): {x_cm:.1f} cm")
+
+        cv2.imshow("myAGV ArUco Detection", frame)
+        
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+
+    cam.release()
+    cv2.destroyAllWindows()
 
 if __name__ == '__main__':
     main()
