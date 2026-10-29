@@ -1,0 +1,41 @@
+#imports, aquí van todas las librerías
+import rclpy#Esta es la librería de ROS2 para python 
+from rclpy.node import Node #Le da la estructura de nodo
+#Estos son los tipos de mesnajes, Twist es la forma de darla velocidad angular y lineal
+from std_msgs.msg import String
+from geometry_msgs.msg import Twist
+
+
+class MiPrimerNodo(Node):#Dependiendo del nombre del nodo aquí va el nombre 
+    def __init__(self):
+        super().__init__('mi_primer_nodo')#Aqu+i tambien va el nombre del nodo esto también hace la inicialización del nodo como clase hija
+        self.pub = self.create_publisher(Twist, 'cmd_vel', 10)#A donde estoy piblicando
+        self.timer = self.create_timer(0.5, self.publicar)
+        #self.contador = 0
+
+    def publicar(self):
+        msg = Twist()
+        msg.linear.x = 0.5    # adelante
+        msg.angular.z = 0.0 
+        self.pub.publish(msg)
+        self.get_logger().info(f'Vel lineal: {msg.linear.x} | Vel angular: {msg.angular.z}')
+
+
+
+def main():
+    rclpy.init()
+    nodo = MiPrimerNodo()
+    try:
+        rclpy.spin(nodo)
+    except KeyboardInterrupt:
+        pass
+    finally:
+        # Antes de cerrar, mandar velocidad cero para que el robot se detenga
+        nodo.pub.publish(Twist())
+        nodo.destroy_node()
+        if rclpy.ok():
+            rclpy.shutdown()
+
+#Lo de siempre de python
+if __name__ == '__main__':
+    main()
