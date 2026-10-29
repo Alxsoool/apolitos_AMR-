@@ -1,7 +1,7 @@
-# Herramienta para OBTENER waypoints en el mapa (ROS 2 Galactic).
+# Herramienta para OBTENER waypoints en el mapa (ROS 2 Galactic). SIN tf.
 #
 # Dos formas de capturar un punto:
-#   1) Enter  -> guarda la pose ACTUAL del robot en el mapa (x, y, yaw).
+#   1) Enter  -> guarda la ultima pose del robot publicada por AMCL (/amcl_pose).
 #                Mueve el robot (teleop) al lugar y presiona Enter.
 #   2) Clic   -> con la herramienta "Publish Point" de RViz, haz clic en el
 #                mapa. Guarda x, y (yaw queda en 0.0, editalo si lo necesitas).
@@ -14,16 +14,14 @@ import os
 import threading
 
 import rclpy
-from geometry_msgs.msg import PointStamped
+from geometry_msgs.msg import PointStamped, PoseWithCovarianceStamped
 from rclpy.node import Node
-from rclpy.time import Time
-from tf2_ros import Buffer, TransformListener, TransformException
+from rclpy.qos import QoSProfile, DurabilityPolicy, ReliabilityPolicy
 
 # ============================================================
 # CONFIGURACION
 # ============================================================
 FRAME_MAPA = 'map'
-FRAME_ROBOT = 'base_link'   # si no funciona, prueba 'base_footprint'
 ARCHIVO_SALIDA = os.path.expanduser('~/waypoints_capturados.py')
 # ============================================================
 
@@ -33,15 +31,29 @@ class CapturadorWaypoints(Node):
         super().__init__('capturador_waypoints')
         self.puntos = []
         self.salir = False
+        self.ultima_pose = None  # (x, y, yaw_deg) segun AMCL
 
-        self.tf_buffer = Buffer()
-        self.tf_listener = TransformListener(self.tf_buffer, self)
+        # AMCL publica /amcl_pose con durabilidad TRANSIENT_LOCAL:
+        # asi recibimos tambien la ultima pose aunque ya se haya publicado.
+        qos_amcl = QoSProfile(
+            depth=1,
+            reliability=ReliabilityPolicy.RELIABLE,
+            durability=DurabilityPolicy.TRANSIENT_LOCAL)
+        self.create_subscription(
+            PoseWithCovarianceStamped, '/amcl_pose', self.amcl_callback, qos_amcl)
 
         # Herramienta "Publish Point" de RViz
         self.create_subscription(
             PointStamped, '/clicked_point', self.clic_callback, 10)
 
-    # ---------- captura ----------
+    # ---------- callbacks ----------
+    def amcl_callback(self, msg):
+        p = msg.pose.pose.position
+        q = msg.pose.pose.orientation
+        yaw = math.atan2(2.0 * (q.w * q.z + q.x * q.y),
+                         1.0 - 2.0 * (q.y * q.y + q.z * q.z))
+        self.ultima_pose = (p.x, p.y, math.degrees(yaw))
+
     def clic_callback(self, msg):
         if msg.header.frame_id != FRAME_MAPA:
             self.get_logger().warn(
@@ -50,25 +62,21 @@ class CapturadorWaypoints(Node):
             return
         self.agregar(msg.point.x, msg.point.y, 0.0, origen='clic')
 
+    # ---------- captura ----------
     def capturar_pose_robot(self):
-        try:
-            t = self.tf_buffer.lookup_transform(FRAME_MAPA, FRAME_ROBOT, Time())
-        except TransformException as e:
-            print(f'[ERROR] No hay transformada {FRAME_MAPA}->{FRAME_ROBOT}. '
-                  f'¿Nav2/AMCL activos y pose inicial puesta? ({e})')
+        if self.ultima_pose is None:
+            print('[ERROR] Aun no llega /amcl_pose. Pon la "2D Pose Estimate" '
+                  'en RViz y mueve un poco el robot para que AMCL publique.')
             return
-        q = t.transform.rotation
-        yaw = math.atan2(2.0 * (q.w * q.z + q.x * q.y),
-                         1.0 - 2.0 * (q.y * q.y + q.z * q.z))
-        self.agregar(t.transform.translation.x, t.transform.translation.y,
-                     math.degrees(yaw), origen='robot')
+        x, y, yaw = self.ultima_pose
+        self.agregar(x, y, yaw, origen='robot')
 
     def agregar(self, x, y, yaw_deg, origen):
         self.puntos.append({'x': round(x, 2), 'y': round(y, 2),
                             'yaw_deg': round(yaw_deg, 1)})
         n = len(self.puntos)
         p = self.puntos[-1]
-        print(f'[P{n} ({origen})] x={p["x"]}  y={p["y"]}  yaw={p["yaw_deg"]}°')
+        print(f'[P{n} ({origen})] x={p["x"]}  y={p["y"]}  yaw={p["yaw_deg"]} deg')
 
     # ---------- salida ----------
     def formato_lista(self):
