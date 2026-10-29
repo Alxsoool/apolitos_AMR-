@@ -1,16 +1,16 @@
-# Herramienta para OBTENER waypoints en el mapa (ROS 2 Galactic). SIN tf.
-#
-# Dos formas de capturar un punto:
-#   1) Enter  -> guarda la ultima pose del robot publicada por AMCL (/amcl_pose).
-#                Mueve el robot (teleop) al lugar y presiona Enter.
-#   2) Clic   -> con la herramienta "Publish Point" de RViz, haz clic en el
-#                mapa. Guarda x, y (yaw queda en 0.0, editalo si lo necesitas).
-#
-# Comandos en la terminal:
-#   Enter = capturar pose del robot | u = deshacer ultimo | l = listar
-#   g = guardar en archivo          | q = salir (guarda automaticamente)
+"""Herramienta para OBTENER waypoints en el mapa (ROS 2 Galactic). SIN tf.
+
+Dos formas de capturar un punto:
+  1) Enter  -> guarda la ultima pose del robot publicada por AMCL (/amcl_pose).
+               Mueve el robot (teleop) al lugar y presiona Enter.
+  2) Clic   -> con la herramienta "Publish Point" de RViz, haz clic en el
+               mapa. Guarda x, y (yaw queda en 0.0, editalo si lo necesitas).
+
+Comandos en la terminal:
+  Enter = capturar pose del robot | u = deshacer ultimo
+  l = listar todos los puntos     | q = salir (imprime la lista final)
+"""
 import math
-import os
 import threading
 
 import rclpy
@@ -22,7 +22,6 @@ from rclpy.qos import QoSProfile, DurabilityPolicy, ReliabilityPolicy
 # CONFIGURACION
 # ============================================================
 FRAME_MAPA = 'map'
-ARCHIVO_SALIDA = os.path.expanduser('~/waypoints_capturados.py')
 # ============================================================
 
 
@@ -88,11 +87,6 @@ class CapturadorWaypoints(Node):
         lineas.append(']')
         return '\n'.join(lineas)
 
-    def guardar(self):
-        with open(ARCHIVO_SALIDA, 'w') as f:
-            f.write(self.formato_lista() + '\n')
-        print(f'[GUARDADO] {ARCHIVO_SALIDA}')
-
     # ---------- interfaz de teclado (hilo aparte) ----------
     def bucle_teclado(self):
         print(__doc__)
@@ -108,12 +102,10 @@ class CapturadorWaypoints(Node):
                     print(f'[DESHECHO] {self.puntos.pop()}')
             elif cmd == 'l':
                 print(self.formato_lista())
-            elif cmd == 'g':
-                self.guardar()
             elif cmd == 'q':
                 break
             else:
-                print('Comando no valido (Enter, u, l, g, q).')
+                print('Comando no valido (Enter, u, l, q).')
         self.salir = True
 
 
@@ -131,8 +123,8 @@ def main():
         pass
     finally:
         if nodo.puntos:
-            print('\n' + nodo.formato_lista())
-            nodo.guardar()
+            print('\n=== Copia esto en WAYPOINTS_CONFIG ===')
+            print(nodo.formato_lista())
         nodo.destroy_node()
         if rclpy.ok():
             rclpy.shutdown()
