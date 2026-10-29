@@ -1,44 +1,39 @@
-# Abre Nav2 (map_server + AMCL) con TU mapa y RViz, todo con un solo comando:
-#   ros2 launch mapa_y_rviz.launch.py
 import os
+import signal
+import subprocess
+import time
 
-from ament_index_python.packages import get_package_share_directory
-from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription
-from launch.launch_description_sources import PythonLaunchDescriptionSource
-
-# ============================================================
-# CONFIGURACION: escribe aqui la ruta de tu mapa
-# ============================================================
 RUTA_MAPA = os.path.expanduser('~/maps/map.yaml')   # <-- cambia esto
 
-# (Opcional) archivo de parametros de Nav2 propio del myAGV.
-# Dejalo en None para usar el que trae nav2_bringup por defecto.
-RUTA_PARAMS = None
-# ============================================================
 
+def main():
+    if not os.path.isfile(RUTA_MAPA):
+        print(f'[ERROR] No existe el mapa: {RUTA_MAPA}')
+        return
 
-def generate_launch_description():
-    nav2_dir = get_package_share_directory('nav2_bringup')
-    launch_dir = os.path.join(nav2_dir, 'launch')
+    comando_nav2 = ['ros2', 'launch', 'nav2_bringup', 'bringup_launch.py',
+                    f'map:={RUTA_MAPA}', 'use_sim_time:=false']
+    comando_rviz = ['ros2', 'launch', 'nav2_bringup', 'rviz_launch.py']
 
-    argumentos_nav2 = {
-        'map': RUTA_MAPA,
-        'use_sim_time': 'false',
-    }
-    if RUTA_PARAMS:
-        argumentos_nav2['params_file'] = RUTA_PARAMS
-
-    nav2 = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            os.path.join(launch_dir, 'bringup_launch.py')),
-        launch_arguments=argumentos_nav2.items())
-
-    rviz = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            os.path.join(launch_dir, 'rviz_launch.py')))
-
-    return LaunchDescription([nav2, rviz])
+    procesos = []
+    try:
+        procesos.append(subprocess.Popen(comando_nav2, start_new_session=True))
+        time.sleep(3)
+        procesos.append(subprocess.Popen(comando_rviz, start_new_session=True))
+        print('Todo en marcha. Ctrl+C para cerrar.')
+        while all(p.poll() is None for p in procesos):
+            time.sleep(0.5)
+    except KeyboardInterrupt:
+        print('\nCerrando...')
+    finally:
+        for p in procesos:
+            if p.poll() is None:
+                os.killpg(os.getpgid(p.pid), signal.SIGINT)
+        for p in procesos:
+            try:
+                p.wait(timeout=10)
+            except subprocess.TimeoutExpired:
+                os.killpg(os.getpgid(p.pid), signal.SIGKILL)
 
 
 if __name__ == '__main__':
