@@ -1,0 +1,39 @@
+# Actividad Integradora: Expansión de una idea con IA (SCAMPER)
+
+## 1. Identificación
+* **Equipo:** Apolitos
+* **Integrantes:** Alexa Marisol Rodríguez Barajas, [Nombre Integrante 2], [Nombre Integrante 3]
+* **Plataforma:** M05 · AMR + ROS 2
+* **Alcance:** Optimización de navegación autónoma.
+* **Idea base y necesidad:** Nuestro AMR visita estaciones con un orden fijo usando una velocidad constante. Queremos mejorar la eficiencia y seguridad de la misión sin que el robot se detenga innecesariamente, buscando una reacción más inteligente ante el entorno.
+
+## 2. Técnica de Ideación
+* **Técnica aplicada:** SCAMPER.
+* **Acciones utilizadas:** Adaptar, Modificar, Combinar.
+* **Alternativas desarrolladas:**
+  1. **Adaptar:** Modificación dinámica de ruta ante bloqueos (saltar una estación si el Costmap detecta bloqueo total y recalcular al final).
+  2. **Modificar:** Modificación dinámica de velocidad por zonas (reducir velocidad en áreas estrechas y acelerar en áreas abiertas).
+  3. **Combinar:** Navegación + Retroalimentación sensorial local (usar LEDs/zumbadores para indicar el estado interno de Nav2: ruta libre, obstáculo o fallo).
+
+## 3. Integración Crítica de IA
+* **Herramienta y Fecha:** Gemini, 30 de octubre de 2026. *(Uso ético declarado conforme a lineamientos del Tecnológico de Monterrey).*
+* **Ejemplo de Prompt:** *"Somos un equipo de Kaizen Dōjō 2026 (Apolitos). Trabajamos en la plataforma M05 (AMR + ROS 2) y queremos mejorar nuestra idea base: el AMR visita estaciones con orden fijo y queremos explorar una reacción inteligente ante el entorno. Aplica SCAMPER (Adaptar, Modificar, Combinar) para proponer 3 alternativas diferentes. Restricciones: 15 horas de trabajo, uso de Nav2, sin inventar compatibilidades."*
+* **Evaluación crítica de los aportes:**
+  * *Aporte 1 (Adaptar ruta):* Excelente para autonomía completa, pero se descartó porque modificar la máquina de estados de alto nivel (Behavior Trees en ROS 2) excede nuestra frontera de tiempo de 15 horas.
+  * *Aporte 2 (Modificar velocidad):* **Aceptado.** Modificar parámetros del *Costmap2D* (*keepout zones* o capas de velocidad) es técnicamente viable y resuelve el problema de eficiencia.
+  * *Aporte 3 (Combinar con hardware):* Descartado. Aporta valor a la interacción humano-robot (HRI), pero no soluciona el problema central de navegación y añade un riesgo de hardware innecesario en esta etapa.
+
+## 4. Elección y Transformación de la Idea
+* **Propuesta Final (Opción 2):** Modificación dinámica de velocidad por zonas.
+* **Qué cambió respecto a la idea inicial:** Pasamos de una navegación rígida (velocidad global plana) a un sistema adaptativo que lee el mapa. El robot ahora tiene consciencia de su entorno espacial para acelerar donde es seguro y frenar donde hay riesgo de colisión.
+* **Valor esperado:** Reducción del tiempo total de la misión (recurso valioso) sin comprometer la seguridad física del AMR en los pasillos angostos.
+* **Riesgo:** Que el controlador local de Nav2 (*controller_server*) genere oscilaciones o movimientos bruscos si los cambios de límite de velocidad entre zonas son muy drásticos.
+* **Prueba de verificación:** Cronometrar (en segundos) un recorrido mixto que incluya zonas estrechas y abiertas. Se comparará el tiempo total y la fluidez del movimiento usando una velocidad global constante *versus* el uso del mapa de velocidad dinámica.
+
+## 5. Reflexión Individual
+* **Alexa Marisol Rodríguez Barajas:** "La IA me ayudó a visualizar que optimizar no siempre significa cambiar la ruta completa (lo cual es muy complejo en ROS 2), sino que podemos mejorar la eficiencia ajustando dinámicamente cómo nos movemos dentro de ella."
+* **[Nombre Integrante 2]:** "[Escribir aquí una frase sobre cómo la IA aportó o limitó su decisión]."
+* **[Nombre Integrante 3]:** "[Escribir aquí una frase sobre cómo la IA aportó o limitó su decisión]."
+
+---
+*Nota de integración: Este documento respalda el entregable E1. El concepto técnico será probado durante el Kaizen 1 (Día 3).*
