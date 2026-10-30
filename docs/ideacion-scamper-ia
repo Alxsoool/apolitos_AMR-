@@ -31,9 +31,11 @@
 * **Prueba de verificación:** Cronometrar (en segundos) un recorrido mixto que incluya zonas estrechas y abiertas. Se comparará el tiempo total y la fluidez del movimiento usando una velocidad global constante *versus* el uso del mapa de velocidad dinámica.
 
 ## 5. Reflexión Individual
-* **Alexa Marisol Rodríguez Barajas:** "La IA me ayudó a visualizar que optimizar no siempre significa cambiar la ruta completa (lo cual es muy complejo en ROS 2), sino que podemos mejorar la eficiencia ajustando dinámicamente cómo nos movemos dentro de ella."
-* **[Nombre Integrante 2]:** "[Escribir aquí una frase sobre cómo la IA aportó o limitó su decisión]."
-* **[Nombre Integrante 3]:** "[Escribir aquí una frase sobre cómo la IA aportó o limitó su decisión]."
+Alexa Rodríguez: "La IA me ayudó a visualizar que optimizar no siempre significa cambiar la ruta completa (lo cual es muy complejo en ROS 2), sino que podemos mejorar la eficiencia ajustando dinámicamente cómo nos movemos dentro de ella."
 
----
-*Nota de integración: Este documento respalda el entregable E1. El concepto técnico será probado durante el Kaizen 1 (Día 3).*
+Ivanna Salas: "El uso de la IA fue clave para descartar ideas que excedían nuestras 15 horas de trabajo, ayudándonos a aterrizar una solución realista enfocada estrictamente en los parámetros de navegación."
+
+Massimo Orozco: "Me pareció muy útil cómo la IA estructuró los riesgos de cada alternativa; esto nos facilitó elegir el mapeo dinámico al entender de antemano el posible problema de oscilación en los controladores."
+
+Miranda García: "La IA funcionó como un excelente filtro técnico, ayudándonos a transformar una navegación rígida en un comportamiento reactivo y dándonos claridad exacta sobre cómo validar el Costmap en la pista."
+
