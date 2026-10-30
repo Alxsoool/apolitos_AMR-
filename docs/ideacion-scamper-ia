@@ -1,10 +1,10 @@
 # Actividad Integradora: Expansión de una idea con IA (SCAMPER)
 
 ## 1. Identificación
-* **Equipo:** Apolitos
-* **Integrantes:** Alexa Marisol Rodríguez Barajas, [Nombre Integrante 2], [Nombre Integrante 3]
-* **Plataforma:** M05 · AMR + ROS 2
-* **Alcance:** Optimización de navegación autónoma.
+* *Equipo:* Apolitos
+* *Integrantes:* Alexa Rodríguez, Ivanna Salas, Massimo Orozco, Miranda García
+* *Plataforma:* M05 · AMR + ROS 2
+* *Alcance:* Optimización de navegación autónoma.
 * **Idea base y necesidad:** Nuestro AMR visita estaciones con un orden fijo usando una velocidad constante. Queremos mejorar la eficiencia y seguridad de la misión sin que el robot se detenga innecesariamente, buscando una reacción más inteligente ante el entorno.
 
 ## 2. Técnica de Ideación
