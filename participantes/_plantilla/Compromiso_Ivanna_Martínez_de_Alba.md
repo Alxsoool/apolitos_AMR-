@@ -103,27 +103,27 @@ Esta es mi propuesta individual dentro de una misión colaborativa. Cada alcance
 
 ### Ciclo Kaizen 1
 
-- **Hipótesis:** _Por documentar_
-- **Cambio implementado:** _Por documentar_
-- **Métrica base:** _Por documentar_
-- **Resultado:** _Por documentar_
+- **Hipótesis:** Un nodo debe ser diferente entre mandar solo velocidades y generar rutas
+- **Cambio implementado:** Tipo de nodo y utilización de librerías 
+- **Métrica base:** Puntos o que tan correcta es la ruta
+- **Resultado:** Nodos con algunos problemas pero llegando a la meta de navegación
 
 ### Ciclo Kaizen 2
 
-- **Hipótesis:** _Por documentar_
-- **Cambio implementado:** _Por documentar_
-- **Comparación con V1:** _Por documentar_
-- **Aprendizaje:** _Por documentar_
+- **Hipótesis:** La navegación por puntos debe ser más eficiente que manualmente
+- **Cambio implementado:** método de navegación
+- **Comparación con V1:** Rutinas autónomas pequeñas
+- **Aprendizaje:** Es importante asegurar que los puntos no estén demasiado cerca entre ellos o paredes
 
 ## 6. Cierre y reflexión
 
-**Antes no podía:** _Por completar_
+**Antes no podía:** Diagnosticar y comprender completamente la navegación autónoma
 
-**Ahora puedo:** _Por completar_
+**Ahora puedo:** Diagnosticar errores básicos y hacer rutinas de navegación 
 
-**Cómo lo demostré:** _Por completar_
+**Cómo lo demostré:** haciendo pruebas de rutinas autónomas simples con seguimiento de coordenadas
 
-**Qué intentaría mejorar después:** _Por completar_
+**Qué intentaría mejorar después:** Aprender más y comprender más del sistema de ROS 
 
 ---
 
