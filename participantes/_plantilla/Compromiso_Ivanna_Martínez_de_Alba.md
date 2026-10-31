@@ -12,7 +12,7 @@ validacion_docente: "PENDIENTE"
 
 # Mi compromiso Kaizen · 2026
 
-> **Mi desafío:** Entender que es lo que toma la cámara y hacer un algoritmo para que el robot tome decisiones
+> **Mi desafío:** Entender que es lo que hace moverse al robot y hacer un algoritmo para que el robot tome decisiones de a donde debe moverse
 
 ## 1. Mi misión y mi frontera
 
@@ -24,7 +24,7 @@ validacion_docente: "PENDIENTE"
 
 **Hoy todavía no puedo:**
 
-Hoy todavía no comprendo completamente como funciona la cámara del robot y que el robot si pueda alinearse a un marcador
+Hoy todavía no comprendo completamente como funciona la cámara del robot y como poder hacer que siga una ruta autonoma
 
 **Al finalizar Kaizen Dōjō demostraré que puedo:**
 
@@ -75,7 +75,7 @@ Esta es mi propuesta individual dentro de una misión colaborativa. Cada alcance
 **Katas elegidos**
 
 - [ ] Definir evento de percepción y umbral interpretable.
-- [ ] Utilizar la cámara para identificar arucos y guiar la decisión del robot _(propuesta propia)
+- [ ] Utilizar la cámara y Lidar para identificar arucos y guiar la decisión del robot _(propuesta propia)
 
 **Mi evidencia final:** _Completar al avanzar el proyecto_
 
