@@ -1,1 +1,7 @@
 fecha,version,alcance_id,ensayo,condicion,metrica,unidad,valor,resultado,observaciones
+27/10/2026,0.1,AR01,Mover el robot utilizando el teclado ,Poder mover el robot de manera teleoperada ,Si hubo movimiento ,Booleano: se movió o no ,No se movió ,Fallido,Hubo errores al momento de conectar el teclado 
+28/10/2026,1,AR04,Realizar el mapa para el robot ,Obtener un mapa claro del espacio de trabajo ,Obtener un mapa utilizable y claro ,Creación correcta o incorrecta del mapa ,Creación correcta del mapa ,Mapa utilizable ,Mapa guardado en la carpeta de MyAGV
+29/10/2026,2,AR01,Creación de un nodo para mandar velocidad ,Obtener movimiento del robot ,Velocidad alcanzada,m/s (velocidad),0,Prueba fallida,Se debe cargar un mapa para asegurar que el robot se pueda mover 
+29/10/2026,2,AR01,Creación de un nodo para mandar velocidad ,Obtener movimiento del robot ,Velocidad alcanzada,m/s (velocidad),0.5,Prueba exitosa,El robot alcanzo la velocidad comandada 
+29/10/2026,3,AR04,Navegación del robot utilizando mapa y serie de coordenadas ,El robot debe cubrir todos los puntos dados ,Puntos alcanzados de los 3 comandados ,Puntos alcanzados ,1,Parcial,Si el punto se pone muy cerca de una pared el robot no se mueve 
+29/10/2026,3,AR04,Navegación del robot utilizando mapa y serie de coordenadas ,El robot debe cubrir todos los puntos dados ,Puntos alcanzados de los 3 comandados ,Puntos alcanzados ,3,Prueba completa ,El robot tarda un tiempo en ajustarse pero llega a la meta comandada 
